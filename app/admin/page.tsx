@@ -216,7 +216,7 @@ export default function AdminDashboard() {
             .eq('user_id', profile.user_id)
 
           const totalOrders = userOrders?.length || 0
-          const totalSpent = userOrders?.reduce((sum, order) => sum + order.total_amount, 0) || 0
+          const totalSpent = userOrders?.reduce((sum: number, order: { total_amount: number }) => sum + order.total_amount, 0) || 0
 
           return {
             id: profile.id,
@@ -232,7 +232,7 @@ export default function AdminDashboard() {
       setCustomers(customersData)
 
       // Calculate statistics
-      const totalRevenue = ordersData.reduce((sum, order) => sum + order.total_amount, 0)
+      const totalRevenue = ordersData.reduce((sum: number, order: Order) => sum + order.total_amount, 0)
       const activeProducts = productsData.filter(p => p.is_active).length
       const lowStockProducts = productsData.filter(p => p.stock_quantity < 10).length
 
